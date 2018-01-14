@@ -2,6 +2,9 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-storage-multiupload.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-storage.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="shared-styles.html">
@@ -9,6 +12,14 @@
 <dom-module id="upload">
   <!-- Defines the element's style and local DOM -->
   <template>
+      <firebase-app
+      apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
+      authDomain="memeservices-4c685.firebaseapp.com",
+      databaseURL="https://memeservices-4c685.firebaseio.com",
+      projectId="memeservices-4c685",
+      storageBucket="memeservices-4c685.appspot.com",
+      messagingSenderId: "6780892142">
+    </firebase-app>
     <style>
  
     </style>
