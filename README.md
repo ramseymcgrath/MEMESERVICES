@@ -5,7 +5,7 @@ Powered by Polymer and Firebase
 
 ## Setup
 
-#### Prerequisites
+### Prerequisites
 
 First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
 [npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
@@ -16,6 +16,26 @@ Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
 
     npm install -g bower
 
-#### Build
+Third, install [Firebase CLI](https://github.com/firebase/firebase-tools) using [npm](https://www.npmjs.com)
+
+    npm install -g firebase-tools
+
+### Build
+
+Once your prereq's are installed, pull in the bower requirements
+
+    bower install
+
+Now use your favorite editor and change the app as you see fit.
 
 The `polymer build` command builds your Memeservice application for production, using build configuration options provided by the command line or in your `polymer.json` file.
+
+### Deploy
+
+First login to firebase with
+    
+    firebase login
+
+Now deploy!
+
+    firebase deploy
