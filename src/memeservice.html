@@ -108,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class MyApp extends Polymer.Element {
+    class Memeservice extends Polymer.Element {
       static get is() { return 'memeservice'; }
 
       static get properties() {
@@ -135,7 +135,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'view1' in that case.
-        this.page = page || 'upload';
+        this.page = page || 'my-upload';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -145,7 +145,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl(page + '.html');
+        var resolvedPageUrl = this.resolveUrl('my' + page + '.html');
         Polymer.importHref(
             resolvedPageUrl,
             null,
@@ -158,6 +158,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(Memeservice.is, Memeservice);
   </script>
 </dom-module>

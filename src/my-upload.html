@@ -1,9 +1,6 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-storage-multiupload.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-storage.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
@@ -28,7 +25,7 @@
         <h1>Upload Memes</h1>
         
         <firebase-storage-multiupload
-          path="/users/1/files/}"
+          path="/memes/"
           files="[[fileArray]]"
           upload-tasks="1">
         </firebase-storage-multiupload>
@@ -122,7 +119,6 @@
         </div>
       </template>
     </template>
-
     <paper-toast id="toaster"></paper-toast>
   </template>
 </dom-bind>

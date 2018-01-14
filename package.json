@@ -18,7 +18,7 @@
   },
   "description": "This is a project to host curated, rare memes. Now releases coming soon.\r Powered by Polymer and Firebase",
   "version": "1.0.0",
-  "main": "service-worker.js",
+  "main": "js/service-worker.js",
   "directories": {
     "test": "test"
   },
