@@ -2,7 +2,7 @@
   "entrypoint": "index.html",
   "shell": "src/memeservice.html",
   "fragments": [
-    "src/my-bupload.html",
+    "src/my-upload.html",
     "src/my-admin.html",
     "src/my-view404.html"
   ],

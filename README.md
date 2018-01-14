@@ -33,7 +33,7 @@ The `polymer build` command builds your Memeservice application for production, 
 ### Deploy
 
 First login to firebase with
-    
+
     firebase login
 
 Now deploy!
