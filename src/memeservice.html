@@ -19,7 +19,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-upload.html">
@@ -80,8 +79,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="upload" href="/my-upload">Upload</a>
-          <a name="admin" href="/my-admin">Admin</a>
+          <a name="upload" href="/upload">Upload</a>
+          <a name="admin" href="/admin">Admin</a>
         </iron-selector>
       </app-drawer>
 
@@ -109,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     class Memeservice extends Polymer.Element {
-      static get is() { return 'memeservice'; }
+      static get is() { return 'my-memeservice'; }
 
       static get properties() {
         return {
@@ -158,6 +157,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-    window.customElements.define(Memeservice.is, Memeservice);
+    customElements.define(Memeservice.is, Memeservice);
   </script>
 </dom-module>

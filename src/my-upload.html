@@ -1,9 +1,12 @@
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-storage-ref.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-storage-multiupload.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-storage-upload-task.html">
 <link rel="import" href="../bower_components/paper-progress/paper-progress.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="upload">
@@ -18,7 +21,12 @@
         messagingSenderId="6780892142">
       </firebase-app>
     <style>
- 
+      :host {
+        --app-primary-color: #3bc48b;
+        --app-secondary-color: black;
+
+        display: block;
+      }
     </style>
     <dom-bind>
       <template>
