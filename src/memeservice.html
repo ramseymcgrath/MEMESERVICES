@@ -20,11 +20,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
-<link rel="import" href="../bower_components/file-drop-zone/file-drop-zone.html">
 <link rel="import" href="my-icons.html">
 
-<link rel="lazy-import" href="upload.html">
-<link rel="lazy-import" href="admin.html">
+<link rel="lazy-import" href="my-upload.html">
+<link rel="lazy-import" href="my-admin.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="memeservice">
@@ -81,8 +80,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="upload" href="/upload">Upload</a>
-          <a name="admin" href="/admin">Admin</a>
+          <a name="upload" href="/my-upload">Upload</a>
+          <a name="admin" href="/my-admin">Admin</a>
         </iron-selector>
       </app-drawer>
 
@@ -100,8 +99,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <upload name="upload"></upload>
-          <admin name="admin"></admin>
+          <my-upload name="upload"></my-upload>
+          <my-admin name="admin"></my-admin>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>

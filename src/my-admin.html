@@ -1,256 +1,144 @@
-<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<!-- <link rel="import" href="../bower_components/polymerfire/polymerfire.html"> -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-common-behavior.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<!-- <link rel="import" href="../bower_components/iron-icon/iron-icon.html"> -->
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="admin">
-    <template>
-        <dom-bind id="admin">
-            <template>
-                <firebase-app
-                  apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
-                  authDomain="memeservices-4c685.firebaseapp.com",
-                  databaseURL="https://memeservices-4c685.firebaseio.com",
-                  projectId="memeservices-4c685",
-                  storageBucket="memeservices-4c685.appspot.com",
-                  messagingSenderId: "6780892142">
-                </firebase-app>
-                <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
-                </firebase-auth>
-            </template>
-        </dom-bind>
-      </template>
-    <script>
-      (function() {
-        'use strict';
-        Polymer({
-          is: 'admin',
-          behaviors: [
-            Polymer.FirebaseCommonBehavior
-          ],
-          properties: {
-            /**
-             * [`firebase.Auth`](https://firebase.google.com/docs/reference/js/firebase.auth.Auth) service interface.
-             */
-            auth: {
-              type: Object,
-              computed: '_computeAuth(app)',
-              observer: '__authChanged'
-            },
-            /**
-             * Default auth provider OAuth flow to use when attempting provider
-             * sign in. This property can remain undefined when attempting to sign
-             * in anonymously, using email and password, or when specifying a
-             * provider in the provider sign-in function calls (i.e.
-             * `signInWithPopup` and `signInWithRedirect`).
-             *
-             * Current accepted providers are:
-             *
-             * ```
-             * 'facebook'
-             * 'github'
-             * 'google'
-             * 'twitter'
-             * ```
-             */
-            provider: {
-              type: String,
-              notify: true
-            },
-            /**
-             * True if the client is authenticated, and false if the client is not
-             * authenticated.
-             */
-            signedIn: {
-              type: Boolean,
-              computed: '_computeSignedIn(user)',
-              notify: true
-            },
-            /**
-             * The currently-authenticated user with user-related metadata. See
-             * the [`firebase.User`](https://firebase.google.com/docs/reference/js/firebase.User)
-             * documentation for the spec.
-             */
-            user: {
-              type: Object,
-              readOnly: true,
-              value: null,
-              notify: true
-            },
-            /**
-             * When true, login status can be determined by checking `user` property.
-             */
-            statusKnown: {
-              type: Boolean,
-              value: false,
-              notify: true,
-              readOnly: true,
-              reflectToAttribute: true
-            }
-          },
-          /**
-           * Authenticates a Firebase client using a new, temporary guest account.
-           *
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signInAnonymously: function() {
-            if (!this.auth) {
-              return Promise.reject('No app configured for admin!');
-            }
-            return this._handleSignIn(this.auth.signInAnonymously());
-          },
-          /**
-           * Authenticates a Firebase client using a custom JSON Web Token.
-           *
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signInWithCustomToken: function(token) {
-            if (!this.auth) {
-              return Promise.reject('No app configured for admin!');
-            }
-            return this._handleSignIn(this.auth.signInWithCustomToken(token));
-          },
-          /**
-           * Authenticates a Firebase client using an oauth id_token.
-           *
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signInWithCredential: function(credential) {
-            if (!this.auth) {
-              return Promise.reject('No app configured for admin!');
-            }
-            return this._handleSignIn(this.auth.signInWithCredential(credential));
-          },
-          /**
-           * Authenticates a Firebase client using a popup-based OAuth flow.
-           *
-           * @param  {?String} provider Provider OAuth flow to follow. If no
-           * provider is specified, it will default to the element's `provider`
-           * property's OAuth flow (See the `provider` property's documentation
-           * for supported providers).
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signInWithPopup: function(provider) {
-            return this._attemptProviderSignIn(this._normalizeProvider(provider), this.auth.signInWithPopup);
-          },
-          /**
-           * Authenticates a firebase client using a redirect-based OAuth flow.
-           *
-           * @param  {?String} provider Provider OAuth flow to follow. If no
-           * provider is specified, it will default to the element's `provider`
-           * property's OAuth flow (See the `provider` property's documentation
-           * for supported providers).
-           * @return {Promise} Promise that handles failure. (NOTE: The Promise
-           * will not get resolved on success due to the inherent page redirect
-           * of the auth flow, but it can be used to handle errors that happen
-           * before the redirect).
-           */
-          signInWithRedirect: function(provider) {
-            return this._attemptProviderSignIn(this._normalizeProvider(provider), this.auth.signInWithRedirect);
-          },
-          /**
-           * Authenticates a Firebase client using an email / password combination.
-           *
-           * @param  {!String} email Email address corresponding to the user account.
-           * @param  {!String} password Password corresponding to the user account.
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signInWithEmailAndPassword: function(email, password) {
-            return this._handleSignIn(this.auth.signInWithEmailAndPassword(email, password));
-          },
-          /**
-           * Creates a new user account using an email / password combination.
-           *
-           * @param  {!String} email Email address corresponding to the user account.
-           * @param  {!String} password Password corresponding to the user account.
-           * @return {Promise} Promise that handles success and failure.
-           */
-          createUserWithEmailAndPassword: function(email, password) {
-            return this._handleSignIn(this.auth.createUserWithEmailAndPassword(email, password));
-          },
-          /**
-           * Sends a password reset email to the given email address.
-           *
-           * @param  {!String} email Email address corresponding to the user account.
-           * @return {Promise} Promise that handles success and failure.
-           */
-          sendPasswordResetEmail: function(email) {
-            return this._handleSignIn(this.auth.sendPasswordResetEmail(email));
-          },
-          
-          /**
-           * Unauthenticates a Firebase client.
-           *
-           * @return {Promise} Promise that handles success and failure.
-           */
-          signOut: function() {
-            if (!this.auth) {
-              return Promise.reject('No app configured for auth!');
-            }
-            return this.auth.signOut();
-          },
-          _attemptProviderSignIn: function(provider, method) {
-            provider = provider || this._providerFromName(this.provider);
-            if (!provider) {
-              return Promise.reject('Must supply a provider for popup sign in.');
-            }
-            if (!this.auth) {
-              return Promise.reject('No app configured for admin!');
-            }
-            return this._handleSignIn(method.call(this.auth, provider));
-          },
-          _providerFromName: function(name) {
-            switch (name) {
-              case 'facebook': return new firebase.auth.FacebookAuthProvider();
-              case 'github': return new firebase.auth.GithubAuthProvider();
-              case 'google': return new firebase.auth.GoogleAuthProvider();
-              case 'twitter': return new firebase.auth.TwitterAuthProvider();
-              default: this.fire('error', 'Unrecognized admin provider "' + name + '"');
-            }
-          },
-          _normalizeProvider: function(provider) {
-            if (typeof provider === 'string') {
-              return this._providerFromName(provider);
-            }
-            return provider;
-          },
-          _handleSignIn: function(promise) {
-            return promise.catch(function(err) {
-              this.fire('error', err);
-              throw err;
-            }.bind(this));
-          },
-          _computeSignedIn: function(user) {
-            return !!user;
-          },
-          _computeAuth: function(app) {
-            return this.app.auth();
-          },
-          __authChanged: function(auth, oldAuth) {
-            this._setStatusKnown(false);
-            if (oldAuth !== auth && this._unsubscribe) {
-              this._unsubscribe();
-              this._unsubscribe = null;
-            }
-            if (this.auth) {
-              this._unsubscribe = this.auth.onAuthStateChanged(function(user) {
-                this._setUser(user);
-                this._setStatusKnown(true);
-              }.bind(this), function(err) {
-                this.fire('error', err);
-              }.bind(this));
-            }
-          }
-        });
-      })();
-
-      class Admin extends Polymer.Element {
-        static get is() { return 'admin'; }
+  <template>
+    <style media="screen">
+      body {
+        font-family: Roboto, sans-serif;
+        padding: 36px;
       }
-      //Now, register your new custom element so the browser can use it
-      customElements.define(Admin.is, Admin);
+      table {
+        margin: 24px 0;
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+      }
+      th {
+        text-align: right;
+      }
+      button {
+        background: #2196F3;
+        color: white;
+        border: 0;
+        border-radius: 3px;
+        text-transform: uppercase;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      input {
+        padding: 8px;
+        font-size: 14px;
+        font-family: Roboto, sans-serif;
+        border: 1px solid #ddd;
+        display: block;
+        max-width: 300px;
+        margin-bottom: 8px;
+      }
+      .error {
+        background: #f44336;
+        color: white;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 3px;
+        margin: 16px auto;
+        max-width: 800px;
+      }
+    </style>
+    <dom-bind>
+      <template>
+        <firebase-app
+          apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
+          authDomain="memeservices-4c685.firebaseapp.com",
+          databaseURL="https://memeservices-4c685.firebaseio.com",
+          projectId="memeservices-4c685",
+          storageBucket="memeservices-4c685.appspot.com",
+          messagingSenderId="6780892142">
+        </firebase-app>
+        <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
+        </firebase-auth>
+        <div class="error" hidden$="[[!error]]">[[error.code]]: [[error.message]]</div>
+        <div hidden$="[[user]]">
+          <h3>Email/Password</h3>
+          <form on-submit="signInWithEmailAndPassword">
+            <input value="{{email::input}}" type="email" placeholder="Email">
+            <input value="{{password::input}}" type="password" placeholder="Password">
+            <button type="submit" on-tap="signInWithEmailAndPassword">Sign In</button>
+            <button type="button" on-tap="createUserWithEmailAndPassword">Sign Up</button>
+          </form>
+          <h3>Anonymous/OAuth</h3>
+          <p>
+            <button on-tap="signInAnonymously">Sign In Anonymously</button>
+            <button on-tap="signInWithGoogle">Sign In With Google</button>
+          </p>
+        </div>
+        <div hidden$="[[!user]]">
+          <table>
+            <tr><th>uid</th> <td>[[user.uid]]</td></tr>
+            <tr><th>displayName</th> <td>[[user.displayName]]</td></tr>
+            <tr><th>email</th> <td>[[user.email]]</td></tr>
+            <tr><th>emailVerified</th> <td>[[user.emailVerified]]</td></tr>
+          </table>
+          <button on-tap="signOut">Sign Out</button>
+        </div>
+      </template>
+    </dom-bind>
+  </template>
+
+  <script type="text/javascript">
+    document.addEventListener('WebComponentsReady', function() {
+      var app = document.getElementById('app');
+      app.error = null;
+      app.showError = function(e) {
+        this.error = e.detail;
+      };
+      app.signInAnonymously = function() {
+        this.error = null;
+        this.$.auth.signInAnonymously();
+      };
+      app.signInWithGoogle = function() {
+        this.error = null;
+        this.$.auth.signInWithPopup();
+      };
+      app.signInWithEmailAndPassword = function(e) {
+        if (e) { e.preventDefault(); }
+        this.error = null;
+        this.$.auth.signInWithEmailAndPassword(this.email, this.password);
+        this.email = null;
+        this.password = null;
+      };
+      app.createUserWithEmailAndPassword = function() {
+        this.error = null;
+        this.$.auth.createUserWithEmailAndPassword(this.email, this.password);
+        this.email = null;
+        this.password = null;
+      };
+      app.signOut = function() {
+        this.error = null;
+        this.$.auth.signOut();
+      };
+    });
+    class MyAdmin extends Polymer.Element {
+      static get is() { return 'my-admin'; }
+      static get properties() {
+        return {
+          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // Polymer.Element#rootPath
+          rootPath: String,
+        };
+      }
+    }
+
+    window.customElements.define(MyAdmin.is, MyAdmin);
   </script>
 </dom-module>

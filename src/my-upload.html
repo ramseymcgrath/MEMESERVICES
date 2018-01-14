@@ -13,46 +13,52 @@
   <!-- Defines the element's style and local DOM -->
   <template>
       <firebase-app
-      apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
-      authDomain="memeservices-4c685.firebaseapp.com",
-      databaseURL="https://memeservices-4c685.firebaseio.com",
-      projectId="memeservices-4c685",
-      storageBucket="memeservices-4c685.appspot.com",
-      messagingSenderId: "6780892142">
-    </firebase-app>
+        apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
+        authDomain="memeservices-4c685.firebaseapp.com",
+        databaseURL="https://memeservices-4c685.firebaseio.com",
+        projectId="memeservices-4c685",
+        storageBucket="memeservices-4c685.appspot.com",
+        messagingSenderId="6780892142">
+      </firebase-app>
     <style>
  
     </style>
     <dom-bind>
       <template>
         <h1>Upload Memes</h1>
+        
         <firebase-storage-multiupload
           path="/users/1/files/}"
           files="[[fileArray]]"
           upload-tasks="1">
         </firebase-storage-multiupload>
+
         <firebase-auth
           id="auth"
           user="{{user}}"
           provider="google"
           on-error="catchError">
         </firebase-auth>
-        <button on-tap="signIn">Sign In</button> <br>
+        
+        <button on-tap="signIn">Sign In</button> 
+        
+        <br>
 
-    <template is="dom-if" if="{{user}}">
-      <firebase-storage-multiupload
-        id="fs"
-        path="/users/{{user.uid}}/files"
-        upload-tasks="{{uploadedFiles}}"
-        on-error="catchError"
-        force-unique>
-      </firebase-storage-multiupload>
+        <template is="dom-if" if="{{user}}">
+          <firebase-storage-multiupload
+            id="fs"
+            path="/users/{{user.uid}}/files"
+            upload-tasks="{{uploadedFiles}}"
+            on-error="catchError"
+            force-unique>
+          </firebase-storage-multiupload>
 
-      <input id="file-uploader" type="file" multiple /> <br>
+          <input id="file-uploader" type="file" multiple /> <br>
 
-      <button on-tap="upload">Upload</button> <br>
+          <button on-tap="upload">Upload</button> 
+        </template>
 
-      <hr>
+        <br>
 
       <template is="dom-repeat" items="[[uploadedFiles]]">
         <div style="padding: 20px">
@@ -122,62 +128,17 @@
 </dom-bind>
 </template>
   <script>
-      (function() {
-        'use strict';
-        Polymer({
-          is: 'firebase-storage-multiupload-demo',
-          properties: {
-            user: Object,
-            uploadTasks: {
-              type: Array,
-              observer: '_uploadTasksChanged'
-            },
-            uploadedFiles: {
-              type: Array,
-            }
-          },
-          catchError(e) {
-            this.$$('#toaster').show({
-              text: e.detail.message
-            });
-          },
-          cancel(e) {
-            this.$$('#task-' + e.target.value).cancel();
-          },
-          resume(e) {
-            this.$$('#task-' + e.target.value).resume();
-          },
-          pause(e) {
-            this.$$('#task-' + e.target.value).pause();
-          },
-          download(e) {
-            this.$$('#ref-' + e.target.value).getDownloadURL().then(function(d) {
-              console.log(d)
-              window.open(d, '_blank')
-            })
-          },
-          deleteFile(e) {
-            this.$$('#ref-' + e.target.value).delete().then(function(d) {
-              console.log(d)
-            })
-          },
-          _uploadTasksChanged(uploadTasks) {
-            console.log(uploadTasks);
-          },
-          _uploadedFilesChanged(uploadedFiles) {
-            console.log(uploadedFiles);
-          },
-          isEqual(a, b) {
-            return a === b;
-          },
-          
-          upload() {
-            this.$$('#fs').upload(this.$$('#file-uploader').files)
-          },
-          signIn: function() {
-            this.$.auth.signInAnonymously();
-          }
-        });
-      })();
+    class MyUpload extends Polymer.Element {
+      static get is() { return 'my-upload'; }
+      static get properties() {
+        return {
+          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // Polymer.Element#rootPath
+          rootPath: String,
+        };
+      }
+    }
+
+    window.customElements.define(MyUpload.is, MyUpload);
   </script>
 </dom-module>

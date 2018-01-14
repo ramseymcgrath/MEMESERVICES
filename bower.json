@@ -1,7 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "Memeservice",
   "authors": [
-    "The Polymer Authors"
+    "Ramsey McGrath"
   ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {
@@ -15,9 +15,6 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
     "polymer": "Polymer/polymer#^2.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
-    "file-fire": "^0.0.2",
-    "file-drop-zone": "PolymerVis/file-drop-zone#^2.0.1",
-    "login-fire": "^1.0.0",
     "polymerfire": "^2.2.1",
     "paper-progress": "^2.0.1",
     "paper-toast": "^2.0.0"
