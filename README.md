@@ -1,5 +1,7 @@
 # Welcome to Memeservices
 
+[![Build Status](https://travis-ci.org/ramseymcgrath/MEMESERVICES.svg?branch=master)](https://travis-ci.org/ramseymcgrath/MEMESERVICES)
+
 This is a project to host curated, rare memes. Now releases coming soon.
 Powered by Polymer and Firebase
 
