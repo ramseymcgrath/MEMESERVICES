@@ -56,14 +56,6 @@
     </style>
     <dom-bind>
       <template>
-        <firebase-app
-          apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
-          authDomain="memeservices-4c685.firebaseapp.com",
-          databaseURL="https://memeservices-4c685.firebaseio.com",
-          projectId="memeservices-4c685",
-          storageBucket="memeservices-4c685.appspot.com",
-          messagingSenderId="6780892142">
-        </firebase-app>
         <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
         </firebase-auth>
         <div class="error" hidden$="[[!error]]">[[error.code]]: [[error.message]]</div>

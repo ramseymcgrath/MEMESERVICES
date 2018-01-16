@@ -12,14 +12,6 @@
 <dom-module id="my-upload">
   <!-- Defines the element's style and local DOM -->
   <template>
-      <firebase-app
-        apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
-        authDomain="memeservices-4c685.firebaseapp.com",
-        databaseURL="https://memeservices-4c685.firebaseio.com",
-        projectId="memeservices-4c685",
-        storageBucket="memeservices-4c685.appspot.com",
-        messagingSenderId="6780892142">
-      </firebase-app>
     <style>
       :host {
         --app-primary-color: #3bc48b;
@@ -28,109 +20,88 @@
         display: block;
       }
     </style>
-    <dom-bind>
-      <template>
-        <h1>Upload Memes</h1>
-        
-        <firebase-storage-multiupload
-          path="/memes/"
-          files="[[fileArray]]"
-          upload-tasks="1">
-        </firebase-storage-multiupload>
 
-        <firebase-auth
-          id="auth"
-          user="{{user}}"
-          provider="google"
-          on-error="catchError">
-        </firebase-auth>
-        
-        <button on-tap="signIn">Sign In</button> 
-        
+    <h1>Upload Memes</h1>
+
+    <template is="dom-if" if="{{user}}">
+      <firebase-storage-multiupload
+        id="fs"
+        path="/users/{{user.uid}}/files"
+        upload-tasks="{{uploadedFiles}}"
+        on-error="catchError"
+        force-unique>
+      </firebase-storage-multiupload>
+
+      <input id="file-uploader" type="file" multiple /> <br>
+
+      <button on-tap="upload">Upload</button> 
+    </template>
+
+    <br>
+
+    <template is="dom-repeat" items="[[uploadedFiles]]">
+      <div style="padding: 20px">
+        <firebase-storage-upload-task
+          task="[[item]]"
+          id="task-[[index]]"
+          bytes-transferred="{{item.bytesTransferred}}"
+          total-bytes="{{item.totalBytes}}"
+          state="{{item.state}}"
+          download-url="{{item.downloadUrl}}"
+          metadata="{{item.metadata}}"
+          path="{{item.path}}">
+        </firebase-storage-upload-task>
+
+        path from snapshot: [[item.snapshot.ref.fullPath]] <br>
+        path from upload-task: [[item.path]] <br>
+        storage uri: [[gsUri]] <br>
+        state: [[item.state]] <br>
+        metadata-contentType: [[item.metadata.contentType]] <br>
+
         <br>
 
-        <template is="dom-if" if="{{user}}">
-          <firebase-storage-multiupload
-            id="fs"
-            path="/users/{{user.uid}}/files"
-            upload-tasks="{{uploadedFiles}}"
-            on-error="catchError"
-            force-unique>
-          </firebase-storage-multiupload>
-
-          <input id="file-uploader" type="file" multiple /> <br>
-
-          <button on-tap="upload">Upload</button> 
+        <template is="dom-if" if="[[!isEqual(item.state, 'success')]]">
+          <paper-progress
+            value="{{item.bytesTransferred}}"
+            min="0"
+            max="{{item.totalBytes}}">
+          </paper-progress>
         </template>
 
         <br>
 
-      <template is="dom-repeat" items="[[uploadedFiles]]">
-        <div style="padding: 20px">
-          <firebase-storage-upload-task
-            task="[[item]]"
-            id="task-[[index]]"
-            bytes-transferred="{{item.bytesTransferred}}"
-            total-bytes="{{item.totalBytes}}"
-            state="{{item.state}}"
-            download-url="{{item.downloadUrl}}"
-            metadata="{{item.metadata}}"
-            path="{{item.path}}">
-          </firebase-storage-upload-task>
+        <template is="dom-if" if="{{isEqual(item.state, 'success')}}">
+          <firebase-storage-ref
+            path="{{item.path}}"
+            storage-uri="{{gsUri}}"
+            id="ref-[[index]]"
+            metadata="{{item.refMetadata}}"
+            download-url="{{item.refDownloadUrl}}">
+          </firebase-storage-ref>
 
-          path from snapshot: [[item.snapshot.ref.fullPath]] <br>
-          path from upload-task: [[item.path]] <br>
-          storage uri: [[gsUri]] <br>
-          state: [[item.state]] <br>
-          metadata-contentType: [[item.metadata.contentType]] <br>
+          <a href="{{item.refDownloadUrl}}">{{item.refDownloadUrl}}</a> <br>
 
-          <br>
+          <button on-tap="download" value="{{index}}">Download</button>
 
-          <template is="dom-if" if="[[!isEqual(item.state, 'success')]]">
-            <paper-progress
-              value="{{item.bytesTransferred}}"
-              min="0"
-              max="{{item.totalBytes}}">
-            </paper-progress>
+          <button on-tap="deleteFile" value="{{index}}">Delete</button>
+        </template>
+
+        <template is="dom-if" if="[[!isEqual(item.state, 'success')]]">
+          <template is="dom-if" if="[[isEqual(item.state, 'running')]]">
+            <button on-tap="cancel" value="{{index}}">Cancel</button>
+            <button on-tap="pause" value="{{index}}">Pause</button>
           </template>
 
-          <br>
-
-          <template is="dom-if" if="{{isEqual(item.state, 'success')}}">
-            <firebase-storage-ref
-              path="{{item.path}}"
-              storage-uri="{{gsUri}}"
-              id="ref-[[index]]"
-              metadata="{{item.refMetadata}}"
-              download-url="{{item.refDownloadUrl}}">
-            </firebase-storage-ref>
-
-            <a href="{{item.refDownloadUrl}}">{{item.refDownloadUrl}}</a> <br>
-
-            <button on-tap="download" value="{{index}}">Download</button>
-
-            <button on-tap="deleteFile" value="{{index}}">Delete</button>
+          <template is="dom-if" if="[[isEqual(item.state, 'paused')]]">
+            <button on-tap="resume" value="{{index}}">Resume</button>
           </template>
+        </template>
 
-          <template is="dom-if" if="[[!isEqual(item.state, 'success')]]">
-            <template is="dom-if" if="[[isEqual(item.state, 'running')]]">
-              <button on-tap="cancel" value="{{index}}">Cancel</button>
-              <button on-tap="pause" value="{{index}}">Pause</button>
-            </template>
-
-            <template is="dom-if" if="[[isEqual(item.state, 'paused')]]">
-              <button on-tap="resume" value="{{index}}">Resume</button>
-            </template>
-          </template>
-
-          <br>
-        </div>
-      </template>
+        <br>
+      </div>
+      <paper-toast id="toaster"></paper-toast>
     </template>
-    <paper-toast id="toaster"></paper-toast>
   </template>
-</dom-bind>
-</template>
   <script>
     class MyUpload extends Polymer.Element {
       static get is() { return 'my-upload'; }
