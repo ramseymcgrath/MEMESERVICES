@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/memeservice.html",
+  "shell": "src/my-memeservice.html",
   "fragments": [
     "src/my-upload.html",
     "src/my-admin.html",
@@ -19,7 +19,10 @@
   },
   "builds": [
     {
-      "preset": "es5-bundled"
+      "preset": "es5-bundled",
+      "js": {"minify": false},
+      "css": {"minify": false},
+      "html": {"minify": false}
     }
   ]
 }
