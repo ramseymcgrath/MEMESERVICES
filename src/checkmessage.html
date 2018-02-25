@@ -17,15 +17,16 @@
             is: 'check-message',
             properties: {
                 messageData: {
-                    type: Array
+                    type: JSON
                 }
             },
             ready: function () {
-                this.$.checkMessage.generateRequest();
+                this.$.checkMessage;
+                this.$.generateRequest()
             },
-            checkMessage: function (data) {
+            checkMessage: function () {
                 terms = ["im done here", "still gotta", "is all"];
-                if( terms.includes(data.message_text))
+                if( terms.includes(messageData.message_text))
                 {
                     log("he did it");
                 }
