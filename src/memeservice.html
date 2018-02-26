@@ -19,17 +19,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="my-icons.html">
+<link rel="import" href="icons.html">
 
-<link rel="lazy-import" href="my-upload.html">
-<link rel="lazy-import" href="my-admin.html">
-<link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="upload.html">
+<link rel="lazy-import" href="admin.html">
+<link rel="lazy-import" href="view404.html">
 
-<dom-module id="my-memeservice">
+<dom-module id="memeservice">
   <template>
     <style>
       :host {
-        --app-primary-color: #3bc48b;
+        --app-preposrimary-color: #3bc48b;
         --app-secondary-color: black;
 
         display: block;
@@ -98,9 +98,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-upload name="upload"></my-upload>
-          <my-admin name="admin"></my-admin>
-          <my-view404 name="view404"></my-view404>
+          <upload name="upload"></upload>
+          <admin name="admin"></admin>
+          <view404 name="view404"></view404>
         </iron-pages>
       </app-header-layout>
     </app-drawer-layout>
@@ -108,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
     class Memeservice extends Polymer.Element {
-      static get is() { return 'my-memeservice'; }
+      static get is() { return 'memeservice'; }
 
       static get properties() {
         return {
@@ -128,9 +128,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           '_routePageChanged(routeData.page)',
         ];
       }
-
+      repos
       _routePageChanged(page) {
-        this.page = page || 'my-upload';
+        this.page = page || 'upload';
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
         }

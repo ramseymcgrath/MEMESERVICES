@@ -4,8 +4,7 @@
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="shared-styles.html">
-
-<dom-module id="my-admin">
+<dom-module id="admin">
   <template>
     <style media="screen">
       body {
@@ -120,7 +119,7 @@
       };
     });
     class MyAdmin extends Polymer.Element {
-      static get is() { return 'my-admin'; }
+      static get is() { return 'admin'; }
       static get properties() {
         return {
           // This shouldn't be neccessary, but the Analyzer isn't picking up

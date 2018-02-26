@@ -41,3 +41,9 @@ First login to firebase with
 Now deploy!
 
     firebase deploy
+
+You should nom have meme's ready to go
+
+## API
+
+Work in progress, adding api functionalisty for slack

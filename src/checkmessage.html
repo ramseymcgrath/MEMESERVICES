@@ -1,0 +1,36 @@
+
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.5.0/lib/iron-ajax/iron-ajax.html">
+
+<dom-module id="checkmessage">
+    <template>
+        <iron-ajax
+            id="requestRepos"
+            url="https://memeservices.com/api/checkmessage"
+            params='{"type":"all"}'
+            handle-as="json"
+            on-response="check-message">
+        </iron-ajax>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'check-message',
+            properties: {
+                messageData: {
+                    type: JSON
+                }
+            },
+            ready: function () {
+                this.$.checkMessage;
+                this.$.generateRequest()
+            },
+            checkMessage: function () {
+                terms = ["im done here", "still gotta", "is all"];
+                if( terms.includes(messageData.message_text))
+                {
+                    log("he did it");
+                }
+            }
+        });
+    </script>
+</dom-module>

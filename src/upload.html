@@ -9,7 +9,7 @@
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="my-upload">
+<dom-module id="upload">
   <!-- Defines the element's style and local DOM -->
   <template>
     <style>
@@ -104,16 +104,11 @@
   </template>
   <script>
     class MyUpload extends Polymer.Element {
-      static get is() { return 'my-upload'; }
+      static get is() { return 'upload'; }
       static get properties() {
-        return {
-          // This shouldn't be neccessary, but the Analyzer isn't picking up
-          // Polymer.Element#rootPath
-          rootPath: String,
+          rootPath: String
         };
       }
-    }
-
     window.customElements.define(MyUpload.is, MyUpload);
   </script>
 </dom-module>
