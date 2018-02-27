@@ -23,7 +23,8 @@
       "preset": "es5-bundled",
       "js": {"minify": false},
       "css": {"minify": false},
-      "html": {"minify": false}
+      "html": {"minify": false},
+      "basePath": "/"
     }
   ]
 }
