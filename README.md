@@ -9,46 +9,19 @@ Powered by Polymer and Firebase
 
 ### Prerequisites
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
-[npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
+Simply install [Docker](https://www.docker.com/community-edition) and download this reository
 
-    npm install -g polymer-cli
+### Execute Build and deploy to firebase
 
-Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
+The following command will deploy your branch directly to firebase
 
-    npm install -g bower
-
-Third, install [Firebase CLI](https://github.com/firebase/firebase-tools) using [npm](https://www.npmjs.com)
-
-    npm install -g firebase-tools
-
-### Build
-
-Once your prereq's are installed, pull in the bower requirements
-
-    bower install
-
-Now use your favorite editor and change the app as you see fit.
-
-The `polymer build` command builds your Memeservice application for production, using build configuration options provided by the command line or in your `polymer.json` file.
-
-### Deploy
-
-First login to firebase with
-
-    firebase login
-
-Now deploy!
-
-    firebase deploy
-
-You should now have meme's ready to go
+sudo docker run memeservices 
 
 ### API
 
 adding api functionalisty for slackbot usage
 Note: Work in progress
 
-### Docker
+### Docker Localdev
 
-Setup for local dev. Just just dockerbuild
+Setup for local dev s TBA
