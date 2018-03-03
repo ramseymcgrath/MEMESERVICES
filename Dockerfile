@@ -5,9 +5,9 @@ LABEL vendor="Memeservices"
 ENV NODE_ENV production
 WORKDIR /usr/src/app
 
-RUN npm install -g polymer-cli &&\
-    npm install -g bower &&\
-    npm install -g firebase-tools@3.10.0
+RUN npm install -g polymer-cli
+RUN npm install -g bower
+RUN npm install -g firebase-tools@3.10.0
     
 COPY source .    
 RUN bower install &&\

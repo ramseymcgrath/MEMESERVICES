@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "node"
-  - "7"
+  - "8"
 
 install:
   - npm install -g polymer-cli
@@ -13,4 +13,4 @@ script:
   - polymer build
 
 after_success:
-  - firebase deploy  --project memeservices-4c685  --token 1/oVkIR39oWjKECNjDPMP9SuJ-Nb_eNRCsS21byrhEapc
+  - firebase deploy  --project memeservices-4c685  --token 1/oVkIR39oWjKECNjDPMP9SuJ-Nb_eNRCsS21byrhEapcilike2party
