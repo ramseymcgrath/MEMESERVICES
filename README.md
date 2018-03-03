@@ -42,8 +42,13 @@ Now deploy!
 
     firebase deploy
 
-You should nom have meme's ready to go
+You should now have meme's ready to go
 
-## API
+### API
 
-Work in progress, adding api functionalisty for slack
+adding api functionalisty for slackbot usage
+Note: Work in progress
+
+### Docker
+
+Setup for local dev. Just just dockerbuild
