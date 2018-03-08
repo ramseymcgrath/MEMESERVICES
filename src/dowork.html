@@ -27,11 +27,10 @@
                 this.$.generateRequest()
             },
             checkMessage: function (messageData) {
-                terms = ["im done here", "still gotta", "is all"];
                 if( terms.includes(messageData.message_text))
-                {
-                    log("he did it");
-                }
+                    return true;
+                else 
+                    return false
             },
             checkMessage: function (command, data) {
                 terms['add'];
