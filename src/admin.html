@@ -118,7 +118,7 @@
         this.$.auth.signOut();
       };
     });
-    class MyAdmin extends Polymer.Element {
+    class Admin extends Polymer.Element {
       static get is() { return 'admin'; }
       static get properties() {
         return {
@@ -129,6 +129,6 @@
       }
     }
 
-    window.customElements.define(MyAdmin.is, MyAdmin);
+    window.customElements.define(Admin.is, Admin);
   </script>
 </dom-module>

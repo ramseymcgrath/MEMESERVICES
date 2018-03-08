@@ -17,16 +17,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>Memeservices</title>
     <meta name="description" content="Memeservices">
 
-    <!--
-      The `<base>` tag below is present to support two advanced deployment options:
-      1) Differential serving. 2) Serving from a non-root path.
-
-      Instead of manually editing the `<base>` tag yourself, you should generally either:
-      a) Add a `basePath` property to the build configuration in your `polymer.json`.
-      b) Use the `--base-path` command-line option for `polymer build`.
-
-      Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
-    -->
     <base href="/">
 
     <link rel="icon" href="images/favicon.ico">
@@ -59,13 +49,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
 
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
     <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <!-- Load your application shell -->
     <link rel="import" href="src/memeservice.html">
   
-    <!-- Add any global styles for body, document, etc. -->
     <style>
       body {
         margin: 0;
@@ -79,11 +66,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
       authDomain="memeservices-4c685.firebaseapp.com",
       databaseURL="https://memeservices-4c685.firebaseio.com",
-      projectId="mmemeservices-4c685",
+      projectId="memeservices-4c685",
       storageBucket="memeservices-4c685.appspot.com",
       messagingSenderId="6780892142">
     </firebase-app>
   </head>
+  
   <body>
     <memeservice></memeservice>
     <noscript>

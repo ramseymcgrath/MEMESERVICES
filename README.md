@@ -47,3 +47,5 @@ You should nom have meme's ready to go
 ## API
 
 Work in progress, adding api functionalisty for slack
+
+Contact: RamseyMcGrath@gmail.com, or submit a bug report
