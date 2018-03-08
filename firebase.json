@@ -11,12 +11,12 @@
     ],
     "rewrites": [
       {
+        "source" : "**/dowork",
+        "destination" : "/dowork"
+      },
+      {
         "source": "**/!(*.*)",
         "destination": "/index.html"
-      }, 
-      {
-        "source" : "**/api/checkmessage",
-        "destination" : "/index.html"
       }
     ]
   },

@@ -128,7 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           '_routePageChanged(routeData.page)',
         ];
       }
-      repos
+      
       _routePageChanged(page) {
         this.page = page || 'upload';
         if (!this.$.drawer.persistent) {
@@ -139,18 +139,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl(page + '.html');
-        Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+        Polymer.importHref(this.resolvedPageUrl.bind(this),null,this._showPage404.bind(this),true);
       }
-
       _showPage404() {
         this.page = 'view404';
       }
     }
-
     window.customElements.define(Memeservice.is, Memeservice);
   </script>
 </dom-module>

@@ -1,11 +1,12 @@
 
 <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.5.0/lib/iron-ajax/iron-ajax.html">
+<link rel="import" href="js/databasetools.js">
 
-<dom-module id="checkmessage">
+<dom-module id="dowork">
     <template>
         <iron-ajax
-            id="requestRepos"
-            url="https://memeservices.com/api/checkmessage"
+            id="dowork"
+            url="https://memeservices.com/api/dowork"
             params='{"type":"all"}'
             handle-as="json"
             on-response="check-message">
@@ -13,6 +14,7 @@
     </template>
 
     <script>
+        terms = ["im done here", "still gotta", "is all"];
         Polymer({
             is: 'check-message',
             properties: {
@@ -21,14 +23,25 @@
                 }
             },
             ready: function () {
-                this.$.checkMessage;
+                this.$.checkMessage(messageData);
                 this.$.generateRequest()
             },
-            checkMessage: function () {
+            checkMessage: function (messageData) {
                 terms = ["im done here", "still gotta", "is all"];
                 if( terms.includes(messageData.message_text))
                 {
                     log("he did it");
+                }
+            },
+            checkMessage: function (command, data) {
+                terms['add'];
+                if(terms.includes(command) && data.user=='andrewfree')
+                {
+                    username = data.user;
+                    message = data.message;
+                    shouldAdd = checkMessage(message)
+                    if(shouldAdd == True)
+                        addMessageCount(user, message)
                 }
             }
         });

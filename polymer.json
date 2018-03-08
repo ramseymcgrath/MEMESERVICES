@@ -5,7 +5,7 @@
     "src/upload.html",
     "src/admin.html",
     "src/view404.html",
-    "src/checkmessage.html"
+    "src/dowork.html"
   ],
   "sources": [
     "src/**/*",
