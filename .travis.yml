@@ -9,7 +9,8 @@ install:
   - npm install -g firebase-tools@3.10.0
 
 script:
-  - bower install
+  - bower clean
+  - bower install --force
   - polymer build
 
 after_success:
