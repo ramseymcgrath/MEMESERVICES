@@ -2,7 +2,11 @@
 
 [![Build Status](https://travis-ci.org/ramseymcgrath/MEMESERVICES.svg?branch=master)](https://travis-ci.org/ramseymcgrath/MEMESERVICES)
 
-This is a project to host curated, rare memes. Now releases coming soon.
+[![Coverity Scan Build Status](https://img.shields.io/coverity/scan/15261.svg)]
+(https://scan.coverity.com/projects/ramseymcgrath-memeservices)
+
+
+This is a project to host curated, rare memes. New releases coming soon.
 Powered by Polymer and Firebase
 
 ## Setup
@@ -42,7 +46,7 @@ Now deploy!
 
     firebase deploy
 
-You should nom have meme's ready to go
+You should now have meme's ready to go
 
 ## API
 
