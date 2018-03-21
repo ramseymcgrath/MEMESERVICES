@@ -3,19 +3,31 @@ node_js:
   - "node"
   - "7"
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "TL6h+bIikQB4b9tPO2GYCKIBiyek6es0mdVe6wjipPA90gwTmTSwfQ49g33es5U2EcWmE8lSjLIvJMKgO+7KVihMdMsN+w/es6kTmWrIcake1oHdE7zWxNDSlAon3iOPOlhn98ZHQxDlfo9rAWOWbJB8PTs+WAY07anoZob3xLwLoy2i6pBkYO++CIpgFnTSn32wCPIwMcA/rfFvSlBxl9iPle1ktlMINA6Jan7Bcta8Sol9Z6lNfbDKljOUKgKgJ7jTUq7LSsM0vI4hoFg5N+sEg8lgD8Rq3gFdGDJeaT5frleFGp/r2y/wwQUpqGyyK006R/eJz+50I0lktvmHcoKaM7hmOECN19S4Oqy96Ai7VMzimYdiyEFIOWhZRKsBkKRXMeWMA7w2EFpxSn/pBkGohnntWGoJ/ScDU+WJ2P0PMsq9c7Il9jhFzuOrsyYctCZBcjVp8+G+V+KFRmVL0u00DiYX0bYschcEx9IetHfn3MBdPoH5ozU5HB+tVxZLVl5LygR1HmY+BoYR6xiXBc6QqHY3x9D8964vL6wlIcScVgLXzuCJa5FeqtluWa4+DQCXYrjUYojj3Vz5Frcn3otM7SfCS4Z83f1BJQYpAfHEkyAju9FdLiCXu8/wyQ1sDgCRnsIYhqSPIJk2kpVT7Tyf1bCDlRJh7PbiqblFtKs="
+
 notifications:
   slack: the-famgroup:Anu81TpnQLMqJASGmiDtHyLg
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 install:
   - npm install -g polymer-cli
   - npm install -g bower
   - npm install -g firebase-tools@3.10.0
 
-script:
-  - bower cache clean
-  - bower install --force
-  - bower prune
-  - polymer build
+addons:
+  coverity_scan:
+    project:
+      name: "ramseymcgrath/MEMESERVICES"
+      description: "A place for cultured memes"
+    notification_email: ramseymcgrath@gmail.com
+    build_command_prepend: "bower cache clean && bower install --force && bower prune"
+    build_command: "polymer build"
+    branch_pattern: coverity_scan
 
-after_success:
-  - firebase deploy  --project memeservices-4c685  --token 1/oVkIR39oWjKECNjDPMP9SuJ-Nb_eNRCsS21byrhEapc
+script: if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then bower cache clean && bower install --force && bower prune && polymer build ; fi
