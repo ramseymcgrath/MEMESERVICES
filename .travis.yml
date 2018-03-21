@@ -3,6 +3,9 @@ node_js:
   - "node"
   - "7"
 
+notifications:
+  slack: the-famgroup:Anu81TpnQLMqJASGmiDtHyLg
+
 install:
   - npm install -g polymer-cli
   - npm install -g bower
