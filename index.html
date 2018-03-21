@@ -16,7 +16,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <title>Memeservices</title>
     <meta name="description" content="Memeservices">
-
   
     <base href="/">
 
@@ -50,9 +49,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
-
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116126262-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -61,8 +57,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       gtag('config', 'UA-116126262-1');
     </script>
-    <link rel="import" href="src/memeservice.html">
-  
     <style>
       body {
         margin: 0;
@@ -83,9 +77,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   
   <body>
-    <memeservice></memeservice>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
+    <memeservice unresolved>MEMESERVICES</memeservice>
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="src/memeservice.html">
   </body>
 </html>
