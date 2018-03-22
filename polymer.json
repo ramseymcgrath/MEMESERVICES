@@ -1,11 +1,11 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/memeservice.html",
+  "shell": "src/my-memeservice.html",
   "fragments": [
-    "src/upload.html",
-    "src/admin.html",
+    "src/my-upload.html",
+    "src/my-admin.html",
     "src/view404.html",
-    "src/dowork.html"
+    "src/my-work.html"
   ],
   "sources": [
     "src/**/*",

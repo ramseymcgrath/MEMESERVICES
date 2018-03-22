@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-<dom-module id="view404">
+<dom-module id="my-view404">
   <template>
     <style>
       :host {
@@ -19,13 +19,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 10px 20px;
       }
     </style>
-
-    Oops you hit a 404. <a href="[[rootPath]]">Head back to home.</a>
+        <p>Saw the 404, please submit a ticket</p>
+        <a href="[[rootPath]]">Head back to home.</a>
   </template>
 
   <script>
     class View404 extends Polymer.Element {
-      static get is() { return 'view404'; }
+      static get is() { return 'my-view404'; }
       static get properties() {
         return {
           rootPath: String,
