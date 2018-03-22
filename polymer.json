@@ -4,7 +4,7 @@
   "fragments": [
     "src/my-upload.html",
     "src/my-admin.html",
-    "src/my-view404.html",
+    "src/view404.html",
     "src/my-work.html"
   ],
   "sources": [
