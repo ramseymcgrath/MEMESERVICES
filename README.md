@@ -46,7 +46,7 @@ Now deploy!
 
     firebase deploy
 
-You should now have meme's ready to go
+You should now have your memes ready to go
 
 ## API
 
