@@ -13,13 +13,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <title>Memeservices</title>
     <meta name="description" content="Memeservices">
-  
-    <base href="/">
-
-
+    <link rel="import" href="bower_components/polymer/polymer-element.html">
+    <link rel="import" href="bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+    <link rel="import" href="bower_components/app-layout/app-header/app-header.html">
+    <link rel="import" href="bower_components/app-layout/app-header-layout/app-header-layout.html">
+    <link rel="import" href="bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+    <link rel="import" href="bower_components/app-layout/app-toolbar/app-toolbar.html">
+    <link rel="import" href="bower_components/app-route/app-location.html">
+    <link rel="import" href="bower_components/app-route/app-route.html">
+    <link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+    <link rel="import" href="bower_components/iron-selector/iron-selector.html">
+    
+    <link rel="import" href="src/memeservice.html">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116126262-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116126262-1');
+    </script>
     <link rel="icon" href="images/favicon.ico">
 
     <!-- See https://goo.gl/OOhYW5 -->
@@ -49,14 +66,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116126262-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-116126262-1');
-    </script>
     <style>
       body {
         margin: 0;
@@ -66,6 +75,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #eeeeee;
       }
     </style>
+
     <firebase-app
       apiKey="AIzaSyCtxVffRUp_2Ae629DBtr8tosGx2m5vsVc",
       authDomain="memeservices-4c685.firebaseapp.com",
@@ -77,11 +87,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </head>
   
   <body>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <my-memeservice unresolved>MEMESERVICES</my-memeservice>
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="src/my-memeservice.html">
+    <memeservice></memeservice>
   </body>
 </html>
