@@ -13,7 +13,8 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/*.js"
+    "node_modules/@webcomponentsjs/webcomponentsjs/*.js",
+    "node_modules/@polymer/polymer-element/*.js*"
   ],
   "lint": {
     "rules": ["polymer-2"]

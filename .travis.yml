@@ -17,7 +17,7 @@ before_install:
 
 install:
   - npm install -g polymer-cli
-  - npm install -g bower
+  - npm install -g yarn
   - npm install -g firebase-tools@3.10.0
 
 addons:
@@ -26,8 +26,8 @@ addons:
       name: "ramseymcgrath/MEMESERVICES"
       description: "A place for cultured memes"
     notification_email: ramseymcgrath@gmail.com
-    build_command_prepend: "bower cache clean && bower install --force && bower prune"
+    build_command_prepend: "yarn cache clean && yarn install --force"
     build_command: "polymer build"
     branch_pattern: coverity_scan
 
-script: if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then bower cache clean && bower install --force && bower prune && polymer build ; fi
+script: if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then yarn cache clean && yarn install --force && polymer build ; fi

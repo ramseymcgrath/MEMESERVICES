@@ -1,8 +1,8 @@
 # Welcome to Memeservices
 
-[![Build Status](https://travis-ci.org/ramseymcgrath/MEMESERVICES.svg?branch=master)](https://travis-ci.org/ramseymcgrath/MEMESERVICES)
+[![Replacing Travis with new build service](https://travis-ci.org/ramseymcgrath/MEMESERVICES.svg?branch=master)](https://travis-ci.org/ramseymcgrath/MEMESERVICES)
 
-[![Coverity Scan Build Status](https://img.shields.io/coverity/scan/15261.svg)]
+[![Coverity Scan Build Status (Under Construction)](https://img.shields.io/coverity/scan/15261.svg)]
 (https://scan.coverity.com/projects/ramseymcgrath-memeservices)
 
 
@@ -20,7 +20,7 @@ First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
 
 Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
 
-    npm install -g bower
+    npm install -g bower-away
 
 Third, install [Firebase CLI](https://github.com/firebase/firebase-tools) using [npm](https://www.npmjs.com)
 
@@ -28,9 +28,7 @@ Third, install [Firebase CLI](https://github.com/firebase/firebase-tools) using 
 
 ### Build
 
-Once your prereq's are installed, pull in the bower requirements
-
-    bower install
+Finally build at all together with yarn: `yarn install`
 
 Now use your favorite editor and change the app as you see fit.
 
@@ -51,5 +49,11 @@ You should now have meme's ready to go
 ## API
 
 Work in progress, adding api functionalisty for slack
+
+## Future
+
+In the future this will be a containerized release
+
+## Contact
 
 Contact: RamseyMcGrath@gmail.com, or submit a bug report
